@@ -1,0 +1,78 @@
+<head>
+	<title>notebook</title>
+</head>
+
+<body>
+	<div class="container">
+		<header>
+			<h1>Note Book</h1>
+		</header>
+
+		<div class="login">
+			{{> loginButtons}}
+		</div>
+
+		<div class="inputclass">
+			<form class="new-task">
+	        <input type="text" name="text" placeholder="Type to add new section" />
+	      	</form>
+
+	      	<form class="new-note">
+	        <input type="text" name="text" placeholder="Type to add new note" />
+	      	</form>  
+      	</div>
+
+		<div class="leftnode">
+			<ul>
+				{{#each showparrent}}
+					{{> parenttask}}
+				{{/each}}
+			</ul>
+		</div>
+
+		<div class="rightnode">
+			{{#if clicked}}
+			<ul>
+				{{#if refresh}}
+					{{#each showchild}}
+						{{#if equals createdBy }}
+							{{> childtask}}
+						{{/if}}
+					{{/each}}
+				{{else}}
+					{{#each showchild}}
+						{{#if equals createdBy }}
+							{{> childtask}}
+						{{/if}}
+					{{/each}}
+				{{/if}}
+			</ul>
+			{{else}}
+				<p>nothing selected</p>
+			{{/if}}
+		</div>
+
+		
+	</div>
+
+
+
+
+</body>
+
+<template name="parenttask">
+	<li >
+		<button class="btnforparrent">{{content}}</button>
+		<button class="delete">&times;</button>
+	</li>
+
+</template>
+
+<template name="childtask">
+	<li>
+		<span>{{content}}</span>
+		<button class="deletechild">&times;</button>
+	</li>
+</template>
+
+
