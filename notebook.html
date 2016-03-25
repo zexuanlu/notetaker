@@ -13,12 +13,15 @@
 		</div>
 
 		<div class="inputclass">
-			<form class="new-task">
-	        <input type="text" name="text" placeholder="Type to add new section" />
-	      	</form>
+
+	      	<button class="new-task">Add Note Header</button>
 
 	      	<form class="new-note">
 	        <input type="text" name="text" placeholder="Type to add new note" />
+	      	</form>  
+
+	      	<form class="new-cupdate">
+	        <input type="text" name="text" placeholder="" value={{getchildvalue}} style="visibility:{{childvisibility}}" />
 	      	</form>  
       	</div>
 
@@ -33,19 +36,9 @@
 		<div class="rightnode">
 			{{#if clicked}}
 			<ul>
-				{{#if refresh}}
-					{{#each showchild}}
-						{{#if equals createdBy }}
+					{{#each showchild}}						
 							{{> childtask}}
-						{{/if}}
 					{{/each}}
-				{{else}}
-					{{#each showchild}}
-						{{#if equals createdBy }}
-							{{> childtask}}
-						{{/if}}
-					{{/each}}
-				{{/if}}
 			</ul>
 			{{else}}
 				<p>nothing selected</p>
@@ -71,6 +64,7 @@
 <template name="childtask">
 	<li>
 		<span>{{content}}</span>
+		<button class="btnchildupdate">update</button>
 		<button class="deletechild">&times;</button>
 	</li>
 </template>
