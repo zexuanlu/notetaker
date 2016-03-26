@@ -23,6 +23,10 @@
 	      	<form class="new-cupdate">
 	        <input type="text" name="text" placeholder="" value={{getchildvalue}} style="visibility:{{childvisibility}}" />
 	      	</form>  
+
+	      	<form class="search">
+	        <input type="text" name="text" placeholder="search" />
+	      	</form>  
       	</div>
 
 		<div class="leftnode">
@@ -62,8 +66,9 @@
 </template>
 
 <template name="childtask">
+
 	<li>
-		<span>{{content}}</span>
+		<span>{{transform}}</span>
 		<button class="btnchildupdate">update</button>
 		<button class="deletechild">&times;</button>
 	</li>

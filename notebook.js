@@ -40,6 +40,22 @@ if (Meteor.isClient) {
 
     childvisibility: function(){
       return Session.get("childvisible");
+    },
+
+    trans: function(){
+      var matchText = "rockylllcjifocky";
+      var searchText = "ock";
+      var regExp = new RegExp(searchText, "g");
+  
+      return Spacebars.SafeString(matchText.replace(regExp, '<span class="highlight">$&</span>'));
+    }
+  });
+
+  Template.childtask.helpers({
+    transform: function(){
+      var text = this.content;
+      var regExp = new RegExp(Session.get("searchtext"), "g");
+      return Spacebars.SafeString(text.replace(regExp, '<span class="highlight">$&</span>'));
     }
   });
 
@@ -97,6 +113,14 @@ if (Meteor.isClient) {
       });
 
 
+    },
+
+    "submit .search": function(event) {
+      event.preventDefault();
+ 
+      // Get value from form element
+      var text = event.target.text.value;
+      Session.set("searchtext", text);
     }
 
 
@@ -148,5 +172,6 @@ if (Meteor.isClient) {
 if (Meteor.isServer) {
   Meteor.startup(function () {
     // code to run on server at startup
+
   });
 }

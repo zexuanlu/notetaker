@@ -157,6 +157,10 @@ header .hide-completed {
   margin-left: 5px;
 }
 
+.highlight {
+	background-color: #00FFFF;
+}
+
 @media (max-width: 600px) {
   li {
     padding: 12px 15px;
