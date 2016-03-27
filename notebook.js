@@ -6,15 +6,16 @@ child = new Mongo.Collection("child");
 
 if (Meteor.isClient) {
 
-  Session.setDefault("currentparrentid", "A");
-  Session.setDefault("parentupdateid", -1);
+  Session.setDefault("currentparrentid", "");
   Session.setDefault("childupdateid", -1);
   Session.setDefault("childupdatevalue", "");
   Session.setDefault("childvisible", "hidden");
+  Session.setDefault("childaddform", "hidden");
+
 
   Template.body.helpers({
     showparrent: function () {
-      return parent.find({});
+      return parent.find({user: Meteor.userId()});
     },
 
     clicked: function(){
@@ -42,13 +43,19 @@ if (Meteor.isClient) {
       return Session.get("childvisible");
     },
 
-    trans: function(){
-      var matchText = "rockylllcjifocky";
-      var searchText = "ock";
-      var regExp = new RegExp(searchText, "g");
-  
-      return Spacebars.SafeString(matchText.replace(regExp, '<span class="highlight">$&</span>'));
+    checklogin: function(){
+      if(Meteor.userId())
+        return "visible";
+      
+      Session.set("currentparrentid", "");
+      Session.set('childaddform', 'hidden');
+      return "hidden";
+    },
+
+    childadd: function() {
+      return Session.get("childaddform");
     }
+
   });
 
   Template.childtask.helpers({
@@ -64,6 +71,7 @@ if (Meteor.isClient) {
 
       parent.insert({
         content: "",
+        user: Meteor.userId(),
       });
 
     },
@@ -131,6 +139,7 @@ if (Meteor.isClient) {
     "click .btnforparrent": function () {
       Session.set("currentparrentid", this._id);
       Session.set("isSet", true);
+      Session.set('childaddform', 'visible');
 
     },
 

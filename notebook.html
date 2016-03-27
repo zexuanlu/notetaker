@@ -12,11 +12,12 @@
 			{{> loginButtons}}
 		</div>
 
+		<div class="afterlog" style="visibility:{{checklogin}}" >
 		<div class="inputclass">
 
 	      	<button class="new-task">Add Note Header</button>
 
-	      	<form class="new-note">
+	      	<form class="new-note" style="visibility:{{childadd}}" >
 	        <input type="text" name="text" placeholder="Type to add new note" />
 	      	</form>  
 
@@ -49,7 +50,7 @@
 			{{/if}}
 		</div>
 
-		
+		</div>
 	</div>
 
 
